@@ -79,6 +79,8 @@ public class ModalWindowPanel : MonoBehaviour
         _headerArea.gameObject.SetActive(!hasTitle);
         _titleField.text = title;
 
+        bool hasImage = (imageToShow = null);
+        _heroImage.gameObject.SetActive(hasImage);
         _heroImage.sprite = imageToShow;
         _heroText.text = message;
 
