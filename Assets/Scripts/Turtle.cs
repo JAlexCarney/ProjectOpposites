@@ -10,6 +10,7 @@ public class Turtle : MonoBehaviour
     private float moveSpeed;
     public Transform cameraTransform;
     public GameObject GameOverScreen;
+    public GameObject WinScreen;
     private Rigidbody2D rb;
     private SpriteRenderer sr;
     private Animator anim;
@@ -40,14 +41,7 @@ public class Turtle : MonoBehaviour
 
     IEnumerator TriggerCollideOnDelay(Collider2D collision)
     {
-        if (moveDirection.y == 0)
-        {
-            yield return new WaitForSeconds(1f / moveSpeed);
-        }
-        else 
-        {
-            yield return new WaitForSeconds(0.5f / moveSpeed);
-        }
+        yield return new WaitForSeconds(0.5f / moveSpeed);
 
         if (collision.CompareTag("Hazard"))
         {
@@ -58,23 +52,27 @@ public class Turtle : MonoBehaviour
         else if (collision.CompareTag("Up"))
         {
             moveDirection = new Vector2(0f, 1f);
+            anim.SetInteger("WalkingDirection", 3);
             Destroy(collision.gameObject);
         }
         else if (collision.CompareTag("Down"))
         {
             moveDirection = new Vector2(0f, -1f);
+            anim.SetInteger("WalkingDirection", 2);
             Destroy(collision.gameObject);
         }
         else if (collision.CompareTag("Right"))
         {
             moveDirection = new Vector2(1f, 0f);
             Destroy(collision.gameObject);
+            anim.SetInteger("WalkingDirection", 0);
             sr.flipX = false;
         }
         else if (collision.CompareTag("Left"))
         {
             moveDirection = new Vector2(-1f, 0f);
             Destroy(collision.gameObject);
+            anim.SetInteger("WalkingDirection", 1);
             sr.flipX = true;
         }
         else if (collision.CompareTag("Fast"))
@@ -92,6 +90,11 @@ public class Turtle : MonoBehaviour
         else if (collision.CompareTag("Jump"))
         {
             Destroy(collision.gameObject);
+        }
+        else if (collision.CompareTag("Goal")) 
+        {
+            isOver = true;
+            WinScreen.SetActive(true);
         }
     }
 

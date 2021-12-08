@@ -12,6 +12,7 @@ TagManager:
   - Slow
   - Fast
   - Jump
+  - Goal
   layers:
   - Default
   - TransparentFX
