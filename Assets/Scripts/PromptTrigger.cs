@@ -12,17 +12,24 @@ public class PromptTrigger : MonoBehaviour
     [TextArea(3, 10)]
     public string message;
 
-    public UnityEvent confirmEvent;
+    public UnityEvent onContinueCallback;
+    public UnityEvent onDeclineCallback;
 
-    public void Interact()
+    public void OnEnable()
     {
-        Action continueAction = null;
+        Action continueCallback = null;
+        Action declineCallback = null;
 
-        if (confirmEvent.GetPersistentEventCount() > 0)
+        if (onContinueCallback.GetPersistentEventCount() > 0)
         {
-            continueAction = confirmEvent.Invoke;
+            continueCallback = onContinueCallback.Invoke;
         }
 
-        UIController.instance.modalWindow.ShowAsPrompt(title, image, message, continueAction);
+        if (onDeclineCallback.GetPersistentEventCount() > 0)
+        {
+            declineCallback = onDeclineCallback.Invoke;
+        }
+
+        UIController.instance.modalWindow.ShowAsPrompt(title, image, message, continueCallback, declineCallback);
     }
 }
