@@ -71,29 +71,22 @@ public class Bird : MonoBehaviour
             {
                 hotbar.Select(5);
             }
-            else if (Input.GetKeyDown(KeyCode.Alpha7))
-            {
-                hotbar.Select(6);
-            }
         }
 
-        if (Input.GetMouseButtonDown(0)) 
+        if (Input.GetMouseButtonDown(0) && playing) 
         {
-            if (!playing)
-            {
-                playing = true;
-                turtle.StartWalking();
-                hotbar.Show();
-            }
-            else 
-            {
-                Vector3 worldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-                GameObject marker = Instantiate(markerPrefab, prefabContainer);
-                marker.transform.position = new Vector3(worldPosition.x, worldPosition.y, 0f);
-                ActionPad actionPad = new ActionPad(marker, prefabs[hotbar.selected], marker.transform.position);
-                actionPads.Enqueue(actionPad);
-            }
+            Vector3 worldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            GameObject marker = Instantiate(markerPrefab, prefabContainer);
+            marker.transform.position = new Vector3(worldPosition.x, worldPosition.y, 0f);
+            ActionPad actionPad = new ActionPad(marker, prefabs[hotbar.selected], marker.transform.position);
+            actionPads.Enqueue(actionPad);
         }
+    }
+
+    public void StartGame() {
+        playing = true;
+        turtle.StartWalking();
+        hotbar.Show();
     }
 
     void FixedUpdate()

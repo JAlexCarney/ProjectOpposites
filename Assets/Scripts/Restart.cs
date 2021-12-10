@@ -10,4 +10,8 @@ public class Restart : MonoBehaviour
         Scene scene = SceneManager.GetActiveScene();
         SceneManager.LoadScene(scene.name);
     }
+
+    public void LoadScene(string SceneName) {
+        SceneManager.LoadScene(SceneName);
+    }
 }

@@ -8,8 +8,7 @@ public class HeroWindowTrigger : MonoBehaviour
 {
     public string title;
     public Sprite sprite;
-
-    [TextArea(3,10)]
+    [TextArea(3, 10)]
     public string message;
     public bool triggerOnEnable;
 

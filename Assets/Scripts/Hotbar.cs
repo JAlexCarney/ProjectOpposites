@@ -9,7 +9,7 @@ public class Hotbar : MonoBehaviour
     private readonly int baseX = 63;
     private readonly int offX = 130;
     public int selected = 0;
-    private int numSlots = 7;
+    private int numSlots = 6;
     private RectTransform highlightrt;
 
     private void Start()
